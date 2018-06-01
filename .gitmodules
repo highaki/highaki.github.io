@@ -1,0 +1,4 @@
+[submodule "build/html"]
+	path = build/html
+	url = https://github.com/highaki/highaki.github.io.git
+	branch = master
