@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Sphinx でドキュメントを作って github pages で公開する方法 &#8212; highaki_user_pages  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="reST(reStructuredText)記法のまとめ" href="tutorial_reST.html" />
+    <link rel="prev" title="Welcome to highaki_user_pages’s documentation!" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tutorial_reST.html" title="reST(reStructuredText)記法のまとめ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to highaki_user_pages’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">highaki_user_pages  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sphinx-github-pages">
+<h1>Sphinx でドキュメントを作って github pages で公開する方法<a class="headerlink" href="#sphinx-github-pages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>はじめに<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>このページでは github pages と Sphinx を使って、ブログ風のホームページを無料で作る方法を説明する。
+ある程度 github とか linux の知識ないと難しいかもしれん。
+2018/05/16 現在の情報で書いてるで。</p>
+</div>
+<div class="section" id="id2">
+<h2>参考ページ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>お世話になったページ。 もうここ見た方が早いかもしれん。</p>
+<ul class="simple">
+<li><a class="reference external" href="http://sphinx-users.jp/cookbook/hosting/index.html#github-pages">http://sphinx-users.jp/cookbook/hosting/index.html#github-pages</a></li>
+<li><a class="reference external" href="https://qiita.com/key-amb/items/4f799fed51734987f3c5">https://qiita.com/key-amb/items/4f799fed51734987f3c5</a></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>用語解説<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>git</dt>
+<dd>ソースコード・ドキュメントなどのバージョンを管理するシステム</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>github</dt>
+<dd>git をネットに保存・公開できるウェブサービス</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>github pages</dt>
+<dd>github に html などを保存すると、Webページ として見ることができる github のサービス</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Sphinx</dt>
+<dd>ドキュメントを簡単に作れるツール。作成したドキュメントは、 html 含め様々な形式で出力可能</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="id4">
+<h2>前提<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>github pages の種類</dt>
+<dd><div class="first last line-block">
+<div class="line">github pages はユーザ（組織）ページとプロジェクトページに分かれる。</div>
+<div class="line">１つの github アカウントに対して、ユーザページは１つ、プロジェクトページは複数作成できる。</div>
+<div class="line">ユーザページとプロジェクトページそれぞれの公開URLは以下の通り。</div>
+<div class="line">ユーザページ： <a class="reference external" href="https:/">https:/</a>/&lt;アカウント名&gt;.github.io</div>
+<div class="line">プロジェクトページ： <a class="reference external" href="https:/">https:/</a>/&lt;アカウント名&gt;.github.io/&lt;リポジトリ名&gt;</div>
+<div class="line">今回は ユーザページ で作成することを考える。</div>
+</div>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+<div class="section" id="id5">
+<h2>作成までの流れ<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>ほんま簡単に書くと以下の流れになる。</p>
+<ol class="arabic simple">
+<li>github に自分のアカウントを登録</li>
+<li>Sphinx をインストール</li>
+<li>ドキュメントを作成しgithubに公開</li>
+</ol>
+<div class="section" id="github">
+<h3>github に自分のアカウントを登録<a class="headerlink" href="#github" title="Permalink to this headline">¶</a></h3>
+<p>まずは github に自分のアカウントを登録や。
+最終的なWebページのURLは↓のようになるからな！
+変な名前にせんようにしないと。</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>https://&lt;アカウント名&gt;.github.io/
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">登録方法は↓がわかりやすい。ユーザーページで作るからリポジトリ名は、 <code class="docutils literal"><span class="pre">&lt;アカウント名&gt;.github.io</span></code> にすること！</div>
+</div>
+<ul class="simple">
+<li><a class="reference external" href="https://qiita.com/kooohei/items/361da3c9dbb6e0c7946b">https://qiita.com/kooohei/items/361da3c9dbb6e0c7946b</a></li>
+</ul>
+</div>
+<div class="section" id="sphinx">
+<h3>Sphinx をインストール<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a></h3>
+<p>Sphinx には python が必要。Windows に python を入れることもできるけど、VM上にインストールやる方法で。
+PC上にVirtualBoxでcentOS7をインストールした後に、↓のページの1.～3. を実施すること。</p>
+<ul class="simple">
+<li><a class="reference external" href="https://sv.hateblo.jp/entry/2017/06/17/Python%E8%A3%BD%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC%E3%80%8CSphinx%E3%80%8D%E3%82%92CentOS7%E3%81%AB30%E5%88%86%E3%81%A7">https://sv.hateblo.jp/entry/2017/06/17/Python%E8%A3%BD%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%93%E3%83%AB%E3%83%80%E3%83%BC%E3%80%8CSphinx%E3%80%8D%E3%82%92CentOS7%E3%81%AB30%E5%88%86%E3%81%A7</a></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h3>ドキュメントを作成しgithubに公開<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>sphinx には <code class="docutils literal"><span class="pre">sphinx-quickstart</span></code> という勝手にサンプルページを作ってくれるコマンドがある。このコマンドでhtmlページを作る！ <code class="docutils literal"><span class="pre">sphinx-quickstart</span></code> はたくさんのオプションがあるけど詳細は↓をみて。</p>
+<p>・<a class="reference external" href="http://sphinx-users.jp/gettingstarted/sphinxquickstart.html">http://sphinx-users.jp/gettingstarted/sphinxquickstart.html</a></p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 作業ディレクトリを作成して移動</span>
+<span class="o">[</span>test_user@localhost ~<span class="o">]</span>$ mkdir sphinx <span class="p">;</span> <span class="nb">cd</span> sphinx <span class="p">;</span> <span class="nb">pwd</span>
+/home/test_user/sphinx
+
+<span class="c1"># サンプルページ作成</span>
+<span class="o">[</span>test_user@localhost sphinx<span class="o">]</span>$ sphinx-quickstart
+Welcome to the Sphinx <span class="m">1</span>.5.6 quickstart utility.
+...
+<span class="c1"># 入力は以下の３つ。それ以外はデフォルトでいいから Enterキー 連打で。</span>
+<span class="c1"># &gt; Separate source and build directories (y/N) [n]: y</span>
+<span class="c1"># &gt; Project name: &lt;プロジェクト名&gt;</span>
+<span class="c1"># &gt; Author name(s): &lt;作成者名&gt;</span>
+
+<span class="c1"># フォルダ構成</span>
+<span class="o">[</span>test_user@localhost sphinx<span class="o">]</span>$ pwd<span class="p">;</span>find . <span class="p">|</span> sort <span class="p">|</span> sed <span class="s1">&#39;1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g&#39;</span>
+/home/test_user/sphinx
+<span class="p">|</span>--Makefile
+<span class="p">|</span>--build
+<span class="p">|</span>--make.bat
+<span class="p">|</span>--source
+<span class="p">|</span>  <span class="p">|</span>--_static
+<span class="p">|</span>  <span class="p">|</span>--_templates
+<span class="p">|</span>  <span class="p">|</span>--conf.py
+<span class="p">|</span>  <span class="p">|</span>--index.rst
+
+<span class="c1"># とりあえずサンプルページを html 出力してみる！</span>
+<span class="o">[</span>test_user@localhost sphinx<span class="o">]</span>$ make html
+Running Sphinx v1.5.6
+making output directory...
+loading pickled environment... not yet created
+building <span class="o">[</span>mo<span class="o">]</span>: targets <span class="k">for</span> <span class="m">0</span> po files that are out of date
+building <span class="o">[</span>html<span class="o">]</span>: targets <span class="k">for</span> <span class="m">1</span> <span class="nb">source</span> files that are out of date
+updating environment: <span class="m">1</span> added, <span class="m">0</span> changed, <span class="m">0</span> removed
+reading sources... <span class="o">[</span><span class="m">100</span>%<span class="o">]</span> index
+looking <span class="k">for</span> now-outdated files... none found
+pickling environment... <span class="k">done</span>
+checking consistency... <span class="k">done</span>
+preparing documents... <span class="k">done</span>
+writing output... <span class="o">[</span><span class="m">100</span>%<span class="o">]</span> index
+generating indices... genindex
+writing additional pages... search
+copying static files... <span class="k">done</span>
+copying extra files... <span class="k">done</span>
+dumping search index in English <span class="o">(</span>code: en<span class="o">)</span> ... <span class="k">done</span>
+dumping object inventory... <span class="k">done</span>
+build succeeded.
+
+Build finished. The HTML pages are in build/html.
+
+<span class="c1"># 作成されたものを確認</span>
+<span class="o">[</span>test_user@localhost sphinx<span class="o">]</span>$ pwd<span class="p">;</span>find . <span class="p">|</span> sort <span class="p">|</span> sed <span class="s1">&#39;1d;s/^\.//;s/\/\([^/]*\)$/|--\1/;s/\/[^/|]*/|  /g&#39;</span>
+/home/test_user/sphinx
+<span class="p">|</span>--Makefile
+<span class="p">|</span>--build
+<span class="p">|</span>  <span class="p">|</span>--doctrees
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--environment.pickle
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--index.doctree
+<span class="p">|</span>  <span class="p">|</span>--html
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--.buildinfo
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--_sources
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--index.rst.txt
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--_static
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--ajax-loader.gif
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--alabaster.css
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--basic.css
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--comment-bright.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--comment-close.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--comment.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--custom.css
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--doctools.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--down-pressed.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--down.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--file.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--jquery-3.1.0.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--jquery.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--minus.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--plus.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--pygments.css
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--searchtools.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--underscore-1.3.1.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--underscore.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--up-pressed.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--up.png
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--websupport.js
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--genindex.html
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--index.html
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--objects.inv
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--search.html
+<span class="p">|</span>  <span class="p">|</span>  <span class="p">|</span>--searchindex.js
+<span class="p">|</span>--make.bat
+<span class="p">|</span>--source
+<span class="p">|</span>  <span class="p">|</span>--_static
+<span class="p">|</span>  <span class="p">|</span>--_templates
+<span class="p">|</span>  <span class="p">|</span>--conf.py
+<span class="p">|</span>  <span class="p">|</span>--index.rst
+
+<span class="c1"># ./build/html フォルダ内を github に公開する！</span>
+<span class="c1"># ディレクトリ移動</span>
+<span class="o">[</span>test_user@localhost sphinx<span class="o">]</span>$ <span class="nb">cd</span> ./build/html/ <span class="p">;</span> <span class="nb">pwd</span> <span class="p">;</span> ls -l
+/home/test_user/sphinx/build/html
+合計 <span class="m">24</span>
+drwxrwxr-x <span class="m">2</span> test_user test_user   <span class="m">27</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 _sources
+drwxrwxr-x <span class="m">2</span> test_user test_user <span class="m">4096</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 _static
+-rw-rw-r-- <span class="m">1</span> test_user test_user <span class="m">2588</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 genindex.html
+-rw-rw-r-- <span class="m">1</span> test_user test_user <span class="m">3868</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 index.html
+-rw-rw-r-- <span class="m">1</span> test_user test_user  <span class="m">236</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 objects.inv
+-rw-rw-r-- <span class="m">1</span> test_user test_user <span class="m">3088</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 search.html
+-rw-rw-r-- <span class="m">1</span> test_user test_user  <span class="m">255</span>  <span class="m">6</span>月  <span class="m">1</span> <span class="m">16</span>:07 searchindex.js
+
+<span class="c1"># リポジトリ作成</span>
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git init
+Initialized empty Git repository in /home/test_user/sphinx/build/html/.git/
+
+<span class="c1"># コミット</span>
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git add .
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git commit -m <span class="s2">&quot;first commit&quot;</span>
+<span class="o">[</span>master <span class="o">(</span>root-commit<span class="o">)</span> 0da0fbe<span class="o">]</span> first commit
+ <span class="m">29</span> files changed, <span class="m">14692</span> insertions<span class="o">(</span>+<span class="o">)</span>
+ create mode <span class="m">100644</span> .buildinfo
+ create mode <span class="m">100644</span> _sources/index.rst.txt
+ create mode <span class="m">100644</span> _static/ajax-loader.gif
+ create mode <span class="m">100644</span> _static/alabaster.css
+ create mode <span class="m">100644</span> _static/basic.css
+ create mode <span class="m">100644</span> _static/comment-bright.png
+ create mode <span class="m">100644</span> _static/comment-close.png
+ create mode <span class="m">100644</span> _static/comment.png
+ create mode <span class="m">100644</span> _static/custom.css
+ create mode <span class="m">100644</span> _static/doctools.js
+ create mode <span class="m">100644</span> _static/down-pressed.png
+ create mode <span class="m">100644</span> _static/down.png
+ create mode <span class="m">100644</span> _static/file.png
+ create mode <span class="m">100644</span> _static/jquery-3.1.0.js
+ create mode <span class="m">100644</span> _static/jquery.js
+ create mode <span class="m">100644</span> _static/minus.png
+ create mode <span class="m">100644</span> _static/plus.png
+ create mode <span class="m">100644</span> _static/pygments.css
+ create mode <span class="m">100644</span> _static/searchtools.js
+ create mode <span class="m">100644</span> _static/underscore-1.3.1.js
+ create mode <span class="m">100644</span> _static/underscore.js
+ create mode <span class="m">100644</span> _static/up-pressed.png
+ create mode <span class="m">100644</span> _static/up.png
+ create mode <span class="m">100644</span> _static/websupport.js
+ create mode <span class="m">100644</span> genindex.html
+ create mode <span class="m">100644</span> index.html
+ create mode <span class="m">100644</span> objects.inv
+ create mode <span class="m">100644</span> search.html
+ create mode <span class="m">100644</span> searchindex.js
+
+<span class="c1"># リモートリポジトリ(つまりgithub)へpush!!!</span>
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git remote add origin https://github.com/&lt;アカウント名&gt;/&lt;アカウント名&gt;.github.io.git
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git push -u origin master
+Username <span class="k">for</span> <span class="s1">&#39;https://github.com&#39;</span>: &lt;アカウント名&gt;
+Password <span class="k">for</span> <span class="s1">&#39;https://&lt;アカウント名&gt;@github.com&#39;</span>: &lt;パスワード&gt;
+Counting objects: <span class="m">33</span>, <span class="k">done</span>.
+Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">31</span>/31<span class="o">)</span>, <span class="k">done</span>.
+Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">33</span>/33<span class="o">)</span>, <span class="m">151</span>.16 KiB <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+Total <span class="m">33</span> <span class="o">(</span>delta <span class="m">2</span><span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>
+remote: Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">2</span>/2<span class="o">)</span>, <span class="k">done</span>.
+To https://github.com/&lt;アカウント名&gt;/&lt;アカウント名&gt;.github.io.git
+ * <span class="o">[</span>new branch<span class="o">]</span>      master -&gt; master
+Branch master <span class="nb">set</span> up to track remote branch master from origin.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>確認作業<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<p>これで準備完了！github pagesにアクセスしてみよう。</p>
+<ul class="simple">
+<li><a class="reference external" href="https:/">https:/</a>/&lt;アカウント名&gt;.github.io</li>
+</ul>
+<img alt="01_sphinx_sample_page" class="align-left" src="../_images/01_sphinx_sample_page.png" />
+<p>なんか CSS が正しく処理されてない。。Jekyllという処理エンジンが悪さをしているらしい。なのでこれを無効にする。具体的には、 <code class="docutils literal"><span class="pre">.nojekyll</span></code> という空ファイルをルートに置く！</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span><span class="c1"># 空ファイル作成</span>
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ touch .nojekyll
+
+<span class="c1"># ローカルリポジトリにコミット</span>
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git add .nojekyll
+<span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git commit -m <span class="s1">&#39;add .nojekyll&#39;</span>
+<span class="o">[</span>master cd8f3df<span class="o">]</span> add .nojekyll
+ <span class="m">1</span> file changed, <span class="m">0</span> insertions<span class="o">(</span>+<span class="o">)</span>, <span class="m">0</span> deletions<span class="o">(</span>-<span class="o">)</span>
+ create mode <span class="m">100644</span> .nojekyll
+
+ <span class="c1"># github へ push!!!</span>
+ <span class="o">[</span>test_user@localhost html<span class="o">]</span>$ git push -u origin master
+ Username <span class="k">for</span> <span class="s1">&#39;https://github.com&#39;</span>: &lt;アカウント名&gt;
+ Password <span class="k">for</span> <span class="s1">&#39;https://&lt;アカウント名&gt;@github.com&#39;</span>: &lt;パスワード&gt;
+ Counting objects: <span class="m">4</span>, <span class="k">done</span>.
+ Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">2</span>/2<span class="o">)</span>, <span class="k">done</span>.
+ Writing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">3</span>/3<span class="o">)</span>, <span class="m">269</span> bytes <span class="p">|</span> <span class="m">0</span> bytes/s, <span class="k">done</span>.
+ Total <span class="m">3</span> <span class="o">(</span>delta <span class="m">1</span><span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>
+ remote: Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">1</span>/1<span class="o">)</span>, completed with <span class="m">1</span> <span class="nb">local</span> object.
+ To https://github.com/&lt;アカウント名&gt;/&lt;アカウント名&gt;.github.io.git
+    0da0fbe..cd8f3df  master -&gt; master
+ Branch master <span class="nb">set</span> up to track remote branch master from origin.
+</pre></div>
+</div>
+<p>もっかいgithub pagesにアクセスしてみよう。</p>
+<img alt="02_sphinx_sample_page" class="align-left" src="../_images/02_sphinx_sample_page.png" />
+<p>うまくいってそう♪
+本ページはここまで。ドキュメントを更新する場合、 <code class="docutils literal"><span class="pre">./source/</span></code> ディレクトリ内に <code class="docutils literal"><span class="pre">*.rst</span></code> を作っていったらええらしい。</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Sphinx でドキュメントを作って github pages で公開する方法</a><ul>
+<li><a class="reference internal" href="#id1">はじめに</a></li>
+<li><a class="reference internal" href="#id2">参考ページ</a></li>
+<li><a class="reference internal" href="#id3">用語解説</a></li>
+<li><a class="reference internal" href="#id4">前提</a></li>
+<li><a class="reference internal" href="#id5">作成までの流れ</a><ul>
+<li><a class="reference internal" href="#github">github に自分のアカウントを登録</a></li>
+<li><a class="reference internal" href="#sphinx">Sphinx をインストール</a></li>
+<li><a class="reference internal" href="#id6">ドキュメントを作成しgithubに公開</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">確認作業</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Welcome to highaki_user_pages&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial_reST.html"
+                        title="next chapter">reST(reStructuredText)記法のまとめ</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/text/startup_github_and_sphinx.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tutorial_reST.html" title="reST(reStructuredText)記法のまとめ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to highaki_user_pages’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">highaki_user_pages  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, highaki.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>
