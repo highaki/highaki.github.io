@@ -8,8 +8,11 @@ Welcome to highaki_user_pages's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :titlesonly:
    :caption: Contents:
+   :glob:
 
+   text/*
 
 
 Indices and tables
