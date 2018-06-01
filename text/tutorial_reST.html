@@ -1,0 +1,723 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reST(reStructuredText)記法のまとめ &#8212; highaki_user_pages  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Welcome to highaki_user_pages’s documentation!" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to highaki_user_pages’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">highaki_user_pages  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="rest-restructuredtext">
+<h1><a class="toc-backref" href="#id29">reST(reStructuredText)記法のまとめ</a><a class="headerlink" href="#rest-restructuredtext" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id30">参考ページ</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://planset-study-sphinx.readthedocs.io/ja/latest/04.html">http://planset-study-sphinx.readthedocs.io/ja/latest/04.html</a></li>
+<li><a class="reference external" href="http://www.ne.jp/asahi/hishidama/home/tech/sphinx/rest.html">http://www.ne.jp/asahi/hishidama/home/tech/sphinx/rest.html</a></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2><a class="toc-backref" href="#id31">はじめに</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>Sphinx version: 1.5.6</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="#id32">凡例</a><a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">コード</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>&lt;表示&gt;</p>
+</div>
+<div class="section" id="id4">
+<h2><a class="toc-backref" href="#id33">ページ内の目次</a><a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. contents:: これは目次です
+        :depth: 2
+</pre></div>
+</div>
+<div class="contents topic" id="id5">
+<p class="topic-title first">これは目次です</p>
+<ul class="simple">
+<li><a class="reference internal" href="#rest-restructuredtext" id="id29">reST(reStructuredText)記法のまとめ</a><ul>
+<li><a class="reference internal" href="#id1" id="id30">参考ページ</a></li>
+<li><a class="reference internal" href="#id2" id="id31">はじめに</a></li>
+<li><a class="reference internal" href="#id3" id="id32">凡例</a></li>
+<li><a class="reference internal" href="#id4" id="id33">ページ内の目次</a></li>
+<li><a class="reference internal" href="#id6" id="id34">改行</a></li>
+<li><a class="reference internal" href="#id7" id="id35">インデント</a></li>
+<li><a class="reference internal" href="#id8" id="id36">整形済みテキスト</a></li>
+<li><a class="reference internal" href="#id9" id="id37">見出し</a></li>
+<li><a class="reference internal" href="#id14" id="id38">リスト</a></li>
+<li><a class="reference internal" href="#id15" id="id39">番号付きリスト(手動)</a></li>
+<li><a class="reference internal" href="#id16" id="id40">番号付きリスト(自動)</a></li>
+<li><a class="reference internal" href="#id17" id="id41">強調</a></li>
+<li><a class="reference internal" href="#id18" id="id42">ラベルと参照</a></li>
+<li><a class="reference internal" href="#id20" id="id43">他のドキュメントを参照</a></li>
+<li><a class="reference internal" href="#id21" id="id44">リンク</a></li>
+<li><a class="reference internal" href="#id22" id="id45">ダウンロード用のリンク</a></li>
+<li><a class="reference internal" href="#id23" id="id46">画像の表示</a></li>
+<li><a class="reference internal" href="#id24" id="id47">テーブル1</a></li>
+<li><a class="reference internal" href="#id25" id="id48">テーブル2</a></li>
+<li><a class="reference internal" href="#csv" id="id49">csvテーブル</a></li>
+<li><a class="reference internal" href="#id26" id="id50">注釈</a></li>
+<li><a class="reference internal" href="#id27" id="id51">折りたたみ</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><a class="toc-backref" href="#id34">改行</a><a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>文章途中の改行は
+認識されません。
+
+| 行頭に&quot;| &quot;を付けることでその文章終りで改行します。
+| 改行
+| します。
+</pre></div>
+</div>
+<p>文章途中の改行は
+認識されません。</p>
+<div class="line-block">
+<div class="line">行頭に&#8221;| &#8220;を付けることでその文章終りで改行します。</div>
+<div class="line">改行</div>
+<div class="line">してます。</div>
+</div>
+</div>
+<div class="section" id="id7">
+<h2><a class="toc-backref" href="#id35">インデント</a><a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>タブでインデントを下げると字下げできます。
+        これは字下げされている文章です。
+
+これは字下げされていない文章です。
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>タブでインデントを下げると字下げできます。</dt>
+<dd>これは字下げされている文章です。</dd>
+</dl>
+<p>これは字下げされていない文章です。</p>
+</div>
+<div class="section" id="id8">
+<h2><a class="toc-backref" href="#id36">整形済みテキスト</a><a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>::
+
+        &quot;::&quot;の下に1行空けて、インデントを付けて文章を書くと
+        基本的な整形済みテキストです。
+
+
+タイトル::
+
+        &quot;::&quot;の前に表題を書くと、「タイトル:」の様に出力される。
+
+
+.. sourcecode:: python
+
+        # &quot;::&quot; の前に &quot;.. sourcecode&quot; を
+        # &quot;::&quot; の後に プログラム言語 を書くことで
+        # プログラム言語特有の表示になる。
+        import os
+        print(os.path)
+
+
+.. sourcecode:: python
+        :linenos:
+
+        # &quot;:linenos:&quot;を付けると
+        # 行数が表示されるようになる
+        import os
+        print(os.path)
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&quot;::&quot;の下に1行空けて、インデントを付けて文章を書くと
+基本的な整形済みテキストです。
+</pre></div>
+</div>
+<p>タイトル:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>&quot;::&quot;の前に表題を書くと、「タイトル:」の様に出力されます。
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># &quot;::&quot; の前に &quot;.. sourcecode&quot; を</span>
+<span class="c1"># &quot;::&quot; の後に プログラム言語 を書くことで</span>
+<span class="c1"># プログラム言語特有の表示になります。</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># &quot;:linenos:&quot;を付けると</span>
+<span class="c1"># 行数が表示されるようになります</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="k">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<div class="section" id="id9">
+<h2><a class="toc-backref" href="#id37">見出し</a><a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">========</span>
+<span class="n">見出し1</span>
+<span class="o">========</span>
+
+<span class="n">見出し2</span>
+<span class="o">========</span>
+
+<span class="n">見出し3</span>
+<span class="o">--------</span>
+
+<span class="n">見出し4</span>
+<span class="o">^^^^^^^^</span>
+
+<span class="n">見出し5</span>
+<span class="o">~~~~~~~~</span>
+
+<span class="n">見出し6</span>
+<span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>※ 見出し1, 見出し2はサンプルなし。</p>
+<div class="section" id="midashi3label">
+<span id="id10"></span><h3>見出し3<a class="headerlink" href="#midashi3label" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id11">
+<h4>見出し4<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h4>
+<div class="section" id="id12">
+<h5>見出し5<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="id13">
+<h6>見出し6<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h6>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id14">
+<h2><a class="toc-backref" href="#id38">リスト</a><a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>マイナス &#8220;<code class="docutils literal"><span class="pre">-</span></code>&#8221; は アスタリスク &#8220;<code class="docutils literal"><span class="pre">*</span></code>&#8221; や プラス &#8220;<code class="docutils literal"><span class="pre">+</span></code>&#8221; でも可能</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">リスト1</span>
+        <span class="o">-</span> <span class="n">ネスト</span> <span class="n">リスト1_1</span>
+                <span class="o">-</span> <span class="n">ネスト</span> <span class="n">リスト1_1_1</span>
+                <span class="o">-</span> <span class="n">ネスト</span> <span class="n">リスト1_1_2</span>
+        <span class="o">-</span> <span class="n">ネスト</span> <span class="n">リスト1_2</span>
+<span class="o">-</span> <span class="n">リスト2</span>
+<span class="o">-</span> <span class="n">リスト3</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>リスト1</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>ネスト リスト1_1</dt>
+<dd><ul class="first last">
+<li>ネスト リスト1_1_1</li>
+<li>ネスト リスト1_1_2</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>ネスト リスト1_2</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>リスト2</li>
+<li>リスト3</li>
+</ul>
+</div>
+<div class="section" id="id15">
+<h2><a class="toc-backref" href="#id39">番号付きリスト(手動)</a><a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<p>閉じ括弧 &#8220;<code class="docutils literal"><span class="pre">)</span></code>&#8221; は ピリオド &#8220;<code class="docutils literal"><span class="pre">.</span></code>&#8221; でも可能</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">)</span> <span class="n">番号付きリスト1</span>
+        <span class="n">a</span><span class="p">)</span> <span class="n">番号付きリスト1_1</span>
+        <span class="n">b</span><span class="p">)</span> <span class="n">番号付きリスト1_2</span>
+<span class="mi">2</span><span class="p">)</span> <span class="n">番号付きリスト2</span>
+<span class="mi">3</span><span class="p">)</span> <span class="n">番号付きリスト3</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>番号付きリスト1</dt>
+<dd><ol class="first last loweralpha">
+<li>番号付きリスト1_1</li>
+<li>番号付きリスト1_2</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>番号付きリスト2</li>
+<li>番号付きリスト3</li>
+</ol>
+</div>
+<div class="section" id="id16">
+<h2><a class="toc-backref" href="#id40">番号付きリスト(自動)</a><a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>#) 番号付きリスト1
+        #) 番号付きリスト1_1
+        #) 番号付きリスト1_2
+#) 番号付きリスト2
+#) 番号付きリスト3
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><dl class="first docutils">
+<dt>番号付きリスト1</dt>
+<dd><ol class="first last arabic">
+<li>番号付きリスト1_1</li>
+<li>番号付きリスト1_2</li>
+</ol>
+</dd>
+</dl>
+</li>
+<li>番号付きリスト2</li>
+<li>番号付きリスト3</li>
+</ol>
+</div>
+<div class="section" id="id17">
+<h2><a class="toc-backref" href="#id41">強調</a><a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span>これは *強調レベル1* （斜字）です。
+これは **強調レベル2** （太字）です。
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">これは <em>強調レベル1</em> （斜字）です。</div>
+<div class="line">これは <strong>強調レベル2</strong> （太字）です。</div>
+</div>
+</div>
+<div class="section" id="id18">
+<h2><a class="toc-backref" href="#id42">ラベルと参照</a><a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">見出しの前に &#8220;<code class="docutils literal"><span class="pre">..</span> <span class="pre">_&lt;任意のラベル名&gt;:</span></code>&#8221; をつけることで、</div>
+<div class="line">見出しにラベルを付与することができます。</div>
+<div class="line">ラベルを参照することで、ページ内のどこからでもラベルの場所に移動することができます。</div>
+<div class="line">参照名は明示的に指定しない場合、</div>
+<div class="line">参照先の見出し名が自動的に記載されます。</div>
+<div class="line">ラベルを付与できる見出しは <a class="reference internal" href="#midashi3label"><span class="std std-ref">見出し3</span></a> までです。</div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. _mylabel:
+
+サンプル見出し
+---------------
+
+:ref:`参照のテスト&lt;mylabel&gt;` へ移動
+:ref:`mylabel` へ移動
+</pre></div>
+</div>
+<div class="section" id="mylabel">
+<span id="id19"></span><h3>サンプル見出し<a class="headerlink" href="#mylabel" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="#mylabel"><span class="std std-ref">参照のテスト</span></a> へ移動
+<a class="reference internal" href="#mylabel"><span class="std std-ref">サンプル見出し</span></a> へ移動</p>
+</div>
+</div>
+<div class="section" id="id20">
+<h2><a class="toc-backref" href="#id43">他のドキュメントを参照</a><a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<div class="line-block">
+<div class="line">&#8220;<code class="docutils literal"><span class="pre">:doc:</span></code>&#8221; の後にローカルパスからの &lt;ファイルのパス&gt; を記載すると、</div>
+<div class="line">当該ファイルへ参照できるリンクを作成できます。</div>
+<div class="line">リンク名は明示的に指定しない場合、</div>
+<div class="line">移動先ファイルの見出しが自動的に記載されます。</div>
+</div>
+<div class="highlight-none"><div class="highlight"><pre><span></span>:doc:`ほげほげ&lt;./sample/sample&gt;`
+:doc:`./sample/sample`
+</pre></div>
+</div>
+<p><a class="reference internal" href="sample/sample.html"><span class="doc">ほげほげ</span></a>
+<a class="reference internal" href="sample/sample.html"><span class="doc">サンプルページ</span></a></p>
+</div>
+<div class="section" id="id21">
+<h2><a class="toc-backref" href="#id44">リンク</a><a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>| URLはそのまま記載することで自動的にリンクされます。
+| https://www.google.co.jp/
+| リンク名を記載することも可能です。
+| `googleのトップページです。 &lt;https://www.google.co.jp/&gt;`_
+| ラベルに予めURLを設定しておくことで
+| リンクを簡単に書けます。
+.. _`google homepage`: http://www.google.co.jp/
+| `google homepage`_
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">URLはそのまま記載することで自動的にリンクされます。</div>
+<div class="line"><a class="reference external" href="https://www.google.co.jp/">https://www.google.co.jp/</a></div>
+<div class="line">リンク名を記載することも可能です。</div>
+<div class="line"><a class="reference external" href="https://www.google.co.jp/">googleのトップページです。</a></div>
+<div class="line">ラベルに予めURLを設定しておくことで</div>
+<div class="line">リンクを簡単に書けます。</div>
+</div>
+<div class="line-block">
+<div class="line"><a class="reference external" href="http://www.google.co.jp/">google homepage</a></div>
+</div>
+</div>
+<div class="section" id="id22">
+<h2><a class="toc-backref" href="#id45">ダウンロード用のリンク</a><a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>| :download:`このファイルをダウンロード &lt;./tutorial_reST.rst&gt;`
+| :download:`./tutorial_reST.rst`
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><a class="reference download internal" href="../_downloads/tutorial_reST.rst" download=""><code class="xref download docutils literal"><span class="pre">このファイルをダウンロード</span></code></a></div>
+<div class="line"><a class="reference download internal" href="../_downloads/tutorial_reST.rst" download=""><code class="xref download docutils literal"><span class="pre">./tutorial_reST.rst</span></code></a></div>
+</div>
+</div>
+<div class="section" id="id23">
+<h2><a class="toc-backref" href="#id46">画像の表示</a><a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>scale</dt>
+<dd>画像の縮尺</dd>
+<dt>width</dt>
+<dd>横幅</dd>
+<dt>height</dt>
+<dd>縦幅</dd>
+<dt>align</dt>
+<dd>配置指定”top”, “middle”, “bottom”, “left”, “center”, “right”が使えます</dd>
+<dt>alt</dt>
+<dd>altテキスト</dd>
+</dl>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. image:: /image/sample.jpg
+        :scale: 40%
+        :align: left
+        :alt: sample1
+
+.. image:: /image/sample.jpg
+        :height: 300px
+        :width: 100px
+        :align: center
+        :alt: sample2
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/sample.jpg"><img alt="sample1" class="align-left" src="../_images/sample.jpg" style="width: 192.0px; height: 127.2px;" /></a>
+<a class="reference internal image-reference" href="../_images/sample.jpg"><img alt="sample2" class="align-center" src="../_images/sample.jpg" style="width: 100px; height: 300px;" /></a>
+</div>
+<div class="section" id="id24">
+<h2><a class="toc-backref" href="#id47">テーブル1</a><a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>======= ====== ======
+col1    col2   col3
+======= ====== ======
+row1    a      b
+row2    a      b
+row3    a      b
+======= ====== ======
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="37%" />
+<col width="32%" />
+<col width="32%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">col1</th>
+<th class="head">col2</th>
+<th class="head">col3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>row1</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="row-odd"><td>row2</td>
+<td>a</td>
+<td>b</td>
+</tr>
+<tr class="row-even"><td>row3</td>
+<td>a</td>
+<td>b</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id25">
+<h2><a class="toc-backref" href="#id48">テーブル2</a><a class="headerlink" href="#id25" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>+------------+------------+-----------+
+| Header 1   | Header 2   | Header 3  |
++============+============+===========+
+| body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+| body row 2 | Cells may span columns.|
++------------+------------+-----------+
+| body row 3 | Cells may  | - Cells   |
++------------+ span rows. | - contain |
+| body row 4 |            | - blocks. |
++------------+------------+-----------+
+</pre></div>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="34%" />
+<col width="34%" />
+<col width="31%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Header 1</th>
+<th class="head">Header 2</th>
+<th class="head">Header 3</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>body row 1</td>
+<td>column 2</td>
+<td>column 3</td>
+</tr>
+<tr class="row-odd"><td>body row 2</td>
+<td colspan="2">Cells may span columns.</td>
+</tr>
+<tr class="row-even"><td>body row 3</td>
+<td rowspan="2">Cells may
+span rows.</td>
+<td rowspan="2"><ul class="first last simple">
+<li>Cells</li>
+<li>contain</li>
+<li>blocks.</li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td>body row 4</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="csv">
+<h2><a class="toc-backref" href="#id49">csvテーブル</a><a class="headerlink" href="#csv" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. csv-table:: Frozen Delights!
+    :header: &quot;Treat&quot;, &quot;Quantity&quot;, &quot;Description&quot;
+    :widths: 15, 10, 30
+
+    &quot;Albatross&quot;, 2.99, &quot;On a stick!&quot;
+    &quot;Crunchy Frog&quot;, 1.49, &quot;If we took the bones out, it wouldn&#39;t be
+    crunchy, now would it?&quot;
+    &quot;Gannet Ripple&quot;, 1.99, &quot;On a stick!&quot;
+</pre></div>
+</div>
+<table border="1" class="colwidths-given docutils" id="id28">
+<caption><span class="caption-text">Frozen Delights!</span><a class="headerlink" href="#id28" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="27%" />
+<col width="18%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Treat</th>
+<th class="head">Quantity</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Albatross</td>
+<td>2.99</td>
+<td>On a stick!</td>
+</tr>
+<tr class="row-odd"><td>Crunchy Frog</td>
+<td>1.49</td>
+<td>If we took the bones out, it wouldn&#8217;t be
+crunchy, now would it?</td>
+</tr>
+<tr class="row-even"><td>Gannet Ripple</td>
+<td>1.99</td>
+<td>On a stick!</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id26">
+<h2><a class="toc-backref" href="#id50">注釈</a><a class="headerlink" href="#id26" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. note::
+
+        これは注釈です！
+
+.. warning::
+
+        これは警告です！
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">これは注釈です！</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">これは警告です！</p>
+</div>
+</div>
+<div class="section" id="id27">
+<h2><a class="toc-backref" href="#id51">折りたたみ</a><a class="headerlink" href="#id27" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;折りたたみ&#8221;はsphinxの拡張機能で実現できます。</p>
+<p>準備として、
+<a class="reference external" href="https://github.com/scopatz/hiddencode">このgithub</a> から
+<code class="docutils literal"><span class="pre">hidden_code_block.py</span></code> を自身のsphinx( <code class="docutils literal"><span class="pre">conf.py</span></code> と同ディレクトリ)に配置します。</p>
+<p><code class="docutils literal"><span class="pre">conf.py</span></code> の <code class="docutils literal"><span class="pre">extensions</span></code> パラメータに <code class="docutils literal"><span class="pre">hidden_code_block</span></code> を追記します。</p>
+<p>そして同じく <code class="docutils literal"><span class="pre">conf.py</span></code> の <code class="docutils literal"><span class="pre">sys.path.insert(0,</span> <span class="pre">os.path.abspath('.'))</span></code> のコメントアウトを外します。</p>
+<p>詳細は、 <a class="reference external" href="https://github.com/scopatz/hiddencode/blob/master/index.rst">https://github.com/scopatz/hiddencode/blob/master/index.rst</a> のInstallationを見ましょう。</p>
+<div class="highlight-none"><div class="highlight"><pre><span></span>.. hidden-code-block:: none
+        :starthidden: True
+
+        初めは折りたたみ状態のコードブロックです。
+
+.. hidden-code-block:: none
+        :starthidden: False
+        :linenos:
+        :label: hidden-code-sample
+
+        初めから見えている状態のコードブロックです。
+        ライン番号あり、かつ&quot;hidden-code-sample&quot;のラベル名を付与しています。
+</pre></div>
+</div>
+<script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock1'))">+ show/hide code</a><br /><div id="hiddencodeblock1" style="display: none"><div class="highlight-none"><div class="highlight"><pre><span></span>初めは折りたたみ状態のコードブロックです。
+</pre></div>
+</div>
+</div><script type="text/javascript">
+    function showhide(element){
+        if (!document.getElementById)
+            return
+        if (element.style.display == "block")
+            element.style.display = "none"
+        else
+            element.style.display = "block"
+    };
+</script>
+<a href="javascript:showhide(document.getElementById('hiddencodeblock2'))">hidden-code-sample</a><br /><div id="hiddencodeblock2" style="display: block"><div class="highlight-none"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span>初めから見えている状態のコードブロックです。
+ライン番号あり、かつ&quot;hidden-code-sample&quot;のラベル名を付与しています。
+</pre></div>
+</td></tr></table></div>
+</div></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">reST(reStructuredText)記法のまとめ</a><ul>
+<li><a class="reference internal" href="#id1">参考ページ</a></li>
+<li><a class="reference internal" href="#id2">はじめに</a></li>
+<li><a class="reference internal" href="#id3">凡例</a></li>
+<li><a class="reference internal" href="#id4">ページ内の目次</a></li>
+<li><a class="reference internal" href="#id6">改行</a></li>
+<li><a class="reference internal" href="#id7">インデント</a></li>
+<li><a class="reference internal" href="#id8">整形済みテキスト</a></li>
+<li><a class="reference internal" href="#id9">見出し</a><ul>
+<li><a class="reference internal" href="#midashi3label">見出し3</a><ul>
+<li><a class="reference internal" href="#id11">見出し4</a><ul>
+<li><a class="reference internal" href="#id12">見出し5</a><ul>
+<li><a class="reference internal" href="#id13">見出し6</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id14">リスト</a></li>
+<li><a class="reference internal" href="#id15">番号付きリスト(手動)</a></li>
+<li><a class="reference internal" href="#id16">番号付きリスト(自動)</a></li>
+<li><a class="reference internal" href="#id17">強調</a></li>
+<li><a class="reference internal" href="#id18">ラベルと参照</a><ul>
+<li><a class="reference internal" href="#mylabel">サンプル見出し</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id20">他のドキュメントを参照</a></li>
+<li><a class="reference internal" href="#id21">リンク</a></li>
+<li><a class="reference internal" href="#id22">ダウンロード用のリンク</a></li>
+<li><a class="reference internal" href="#id23">画像の表示</a></li>
+<li><a class="reference internal" href="#id24">テーブル1</a></li>
+<li><a class="reference internal" href="#id25">テーブル2</a></li>
+<li><a class="reference internal" href="#csv">csvテーブル</a></li>
+<li><a class="reference internal" href="#id26">注釈</a></li>
+<li><a class="reference internal" href="#id27">折りたたみ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../index.html"
+                        title="previous chapter">Welcome to highaki_user_pages&#8217;s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/text/tutorial_reST.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to highaki_user_pages’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">highaki_user_pages  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, highaki.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.5.6.
+    </div>
+  </body>
+</html>
